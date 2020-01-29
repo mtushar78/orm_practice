@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import orm_practice.practice.model.Student;
 import orm_practice.practice.repository.StudentRepository;
+import orm_practice.practice.service.StudentService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +18,8 @@ import java.util.Set;
 public class RestApiController {
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    StudentService studentService;
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudent(){
@@ -27,4 +31,15 @@ public class RestApiController {
         Optional<Student> student = studentRepository.findById(id);
         return new ResponseEntity<Optional<Student>>(student,new HttpHeaders(), HttpStatus.OK);
     }
+   /* public ResponseEntity<StudentEntity> createOrUpdateStudent(@Valid @RequestBody StudentEntity student)
+            throws RecordNotFoundException {
+        StudentEntity updated = studentService.createOrUpdateStudent(student);
+        return new ResponseEntity<StudentEntity>(updated, new HttpHeaders(), HttpStatus.OK);
+    }*/
+   @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<Student> createOrUpdateStudent(@Valid @RequestBody Student student ){
+        Student student1 = studentService.createRecord(student);
+        return new ResponseEntity<Student>(student1, new HttpHeaders(),HttpStatus.OK);
+   }
+
 }
