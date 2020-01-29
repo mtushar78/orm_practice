@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import orm_practice.practice.model.DemoTest;
 import orm_practice.practice.model.Student;
+import orm_practice.practice.repository.DemoRepository;
 import orm_practice.practice.repository.StudentRepository;
 import orm_practice.practice.service.StudentService;
 
@@ -20,6 +22,8 @@ public class RestApiController {
     StudentRepository studentRepository;
     @Autowired
     StudentService studentService;
+    @Autowired
+    DemoRepository repository;
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudent(){
@@ -36,10 +40,20 @@ public class RestApiController {
         StudentEntity updated = studentService.createOrUpdateStudent(student);
         return new ResponseEntity<StudentEntity>(updated, new HttpHeaders(), HttpStatus.OK);
     }*/
-   @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
+   @PostMapping(value = "/post")
    public ResponseEntity<Student> createOrUpdateStudent(@Valid @RequestBody Student student ){
         Student student1 = studentService.createRecord(student);
         return new ResponseEntity<Student>(student1, new HttpHeaders(),HttpStatus.OK);
    }
+    @PostMapping(value = "/demo")
+    public ResponseEntity<DemoTest> createOrUpdateStudent(@Valid @RequestBody DemoTest demoTest ) {
+        DemoTest demoTest1 = repository.save(demoTest);
+        return new ResponseEntity<DemoTest>(demoTest1, new HttpHeaders(), HttpStatus.OK);
+    }
+    @GetMapping(value = "/demo")
+    public ResponseEntity<List<DemoTest>> getDemo(){
+        List<DemoTest> list =  repository.findAll();
+        return new ResponseEntity<List<DemoTest>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
 
 }
