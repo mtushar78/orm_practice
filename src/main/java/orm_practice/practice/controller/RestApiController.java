@@ -40,9 +40,11 @@ public class RestApiController {
         StudentEntity updated = studentService.createOrUpdateStudent(student);
         return new ResponseEntity<StudentEntity>(updated, new HttpHeaders(), HttpStatus.OK);
     }*/
-   @PostMapping(value = "/post")
+   @PostMapping(value = "/post", consumes = "application/json", produces = "application/json" )
    public ResponseEntity<Student> createOrUpdateStudent(@Valid @RequestBody Student student ){
-        Student student1 = studentService.createRecord(student);
+//        Student student1 = studentService.createRecord(student);
+         Student student1 = studentRepository.save(student);
+
         return new ResponseEntity<Student>(student1, new HttpHeaders(),HttpStatus.OK);
    }
     @PostMapping(value = "/demo")

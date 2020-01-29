@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
-public class Student {
+public class Student implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -59,7 +59,7 @@ public class Student {
     public void setLname(String lname) {
         this.lname = lname;
     }
-    @JsonManagedReference
+//    @JsonManagedReference
     public Semester getSemesteer() {
         return semesteer;
     }
