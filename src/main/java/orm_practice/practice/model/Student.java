@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class Student implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String fname;
     private String email;

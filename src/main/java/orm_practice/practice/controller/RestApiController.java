@@ -45,8 +45,20 @@ public class RestApiController {
 //        Student student1 = studentService.createRecord(student);
          Student student1 = studentRepository.save(student);
 
-        return new ResponseEntity<Student>(student1, new HttpHeaders(),HttpStatus.OK);
+        return new ResponseEntity<Student>(student1, new HttpHeaders(),HttpStatus.CREATED);
    }
+
+   @DeleteMapping(path = "/{id}")
+   public String deleteEntity(@PathVariable ("id") Integer id){
+       if(studentRepository.existsById(id)){
+            studentRepository.deleteById(id);
+            return "Status:"+HttpStatus.NO_CONTENT;
+       }else{
+           return "Status:"+HttpStatus.NOT_FOUND;
+       }
+
+   }
+
     @PostMapping(value = "/demo")
     public ResponseEntity<DemoTest> createOrUpdateStudent(@Valid @RequestBody DemoTest demoTest ) {
         DemoTest demoTest1 = repository.save(demoTest);
