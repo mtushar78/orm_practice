@@ -3,13 +3,13 @@ package orm_practice.practice.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
+
 public class Course{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

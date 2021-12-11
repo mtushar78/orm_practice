@@ -1,7 +1,6 @@
 package orm_practice.practice.model;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
 public class Semester  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
