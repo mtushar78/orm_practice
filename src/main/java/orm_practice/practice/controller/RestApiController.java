@@ -8,6 +8,7 @@ import orm_practice.practice.dto.BillInfoSdnJoinDto;
 import orm_practice.practice.model.DemoTest;
 import orm_practice.practice.model.Student;
 import orm_practice.practice.repository.DemoRepository;
+import orm_practice.practice.repository.JpaProjection;
 import orm_practice.practice.repository.StudentRepository;
 import orm_practice.practice.service.BillInfoService;
 import orm_practice.practice.service.StudentService;
@@ -79,5 +80,9 @@ public class RestApiController {
         List<BillInfoSdnJoinDto> list =  billInfoService.getData();
         return new ResponseEntity<List<BillInfoSdnJoinDto>>(list, new HttpHeaders(), HttpStatus.OK);
     }
-
+    @GetMapping(value = "/projection")
+    public ResponseEntity<List<JpaProjection>> getAllDatap(){
+        List<JpaProjection> list =  billInfoService.getDataWithProjection();
+        return new ResponseEntity<List<JpaProjection>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
 }

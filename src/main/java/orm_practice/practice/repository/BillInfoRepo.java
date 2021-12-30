@@ -14,4 +14,17 @@ public interface BillInfoRepo extends JpaRepository<BillInfoEntity, Long> {
             + "FROM BillInfoEntity bi JOIN bi.sndList sl where bi.payment_Status = 'PAID'" +
             "group by sl.sndId, bi.billNo,bi.collection_Date,bi.Bank_Txn_Id,bi.Nesco_Txn_Id,bi.total_BillAmount,bi.Principal_Amount,sl.displayOrder,sl.sNDName order by sl.displayOrder asc")
     List<BillInfoSdnJoinDto> fetchBillInfoSDNJoin();
+
+
+    @Query(value = "select bi.bill_no,cast(bi.collection_date as date) collection_date,bi.bank_txn_id,bi.nesco_txn_id,bi.total_bill_amount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
+            "bi.rev_stamp_amount,bi.net_principal_Amount,bi.snd_id,sl.sndname,sl.display_order " +
+            "from tbl_billinfo bi " +
+            "join tbl_sndlist sl on sl.snd_id=bi.snd_id " +
+            "where payment_status='PAID' " +
+            "group by bi.snd_id, bi.bill_no,bi.collection_date, " +
+            "bi.bank_txn_id,bi.nesco_txn_id,bi.total_bill_amount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
+            "bi.rev_stamp_amount,bi.net_principal_Amount,sl.display_order,sl.sndname " +
+            "order by sl.display_order asc", nativeQuery = true)
+    List<JpaProjection> billInfoWithProjection();
+
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import orm_practice.practice.dto.BillInfoSdnJoinDto;
 import orm_practice.practice.repository.BillInfoRepo;
+import orm_practice.practice.repository.JpaProjection;
 
 import java.util.List;
 
@@ -15,5 +16,9 @@ public class BillInfoService {
     public List<BillInfoSdnJoinDto> getData(){
         return billInfoRepo.fetchBillInfoSDNJoin();
     }
+    public List<JpaProjection> getDataWithProjection(){
+        return billInfoRepo.billInfoWithProjection();
+    }
+
 
 }
