@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import orm_practice.practice.dto.BillInfoSdnJoinDto;
 import orm_practice.practice.model.DemoTest;
 import orm_practice.practice.model.Student;
 import orm_practice.practice.repository.DemoRepository;
 import orm_practice.practice.repository.StudentRepository;
+import orm_practice.practice.service.BillInfoService;
 import orm_practice.practice.service.StudentService;
 
 import javax.validation.Valid;
@@ -24,6 +26,8 @@ public class RestApiController {
     StudentService studentService;
     @Autowired
     DemoRepository repository;
+    @Autowired
+    BillInfoService billInfoService;
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudent(){
@@ -68,6 +72,12 @@ public class RestApiController {
     public ResponseEntity<List<DemoTest>> getDemo(){
         List<DemoTest> list =  repository.findAll();
         return new ResponseEntity<List<DemoTest>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getData")
+    public ResponseEntity<List<BillInfoSdnJoinDto>> getAllData(){
+        List<BillInfoSdnJoinDto> list =  billInfoService.getData();
+        return new ResponseEntity<List<BillInfoSdnJoinDto>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
 }
