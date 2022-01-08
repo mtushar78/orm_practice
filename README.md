@@ -54,7 +54,7 @@ public class BillInfoEntity {
 	  @Fetch(FetchMode.JOIN)
 	  private SNDList sndList;
 ```
-For better understranding of FetchMode, go through below link
+For better understranding of FetchMode, go through the link
 https://solidsyntax.be/2013/10/17/fetching-collections-hibernate/
 
 
