@@ -127,6 +127,7 @@ This is the native query written into the `BillInfoRepo` repository. An interfac
 	
  Now I've created a seperate endpoint `http://localhost:8082/api/projection` just to get value from Jpa projection process. 
 	
-	![projection](https://user-images.githubusercontent.com/30841228/148671870-14e4589d-4eff-4613-9fdb-8adc102edeb7.JPG)
+
+![projection](https://user-images.githubusercontent.com/30841228/148671959-09c31dd2-5948-4f56-92de-804cd3af5252.JPG)
 
 **Don't forget to give me a star!**
