@@ -10,7 +10,7 @@ public class BillInfoSdnJoinDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date collection_date;
     private String bank_txn_id;
-    private String nesco_txn_id;
+    private String disco_txn_id;
     private Double total_billAmount;
     private Double Principal_Amount;
     private Double vat_amount;
@@ -28,7 +28,7 @@ public class BillInfoSdnJoinDto {
         this.bill_no = bill_no;
         this.collection_date = collection_date;
         this.bank_txn_id = bank_txn_id;
-        this.nesco_txn_id = nesco_txn_id;
+        this.disco_txn_id = nesco_txn_id;
         this.total_billAmount = total_billAmount;
         Principal_Amount = principal_Amount;
         this.vat_amount = vat_amount;
@@ -64,12 +64,12 @@ public class BillInfoSdnJoinDto {
         this.bank_txn_id = bank_txn_id;
     }
 
-    public String getNesco_txn_id() {
-        return nesco_txn_id;
+    public String getDisco_txn_id() {
+        return disco_txn_id;
     }
 
-    public void setNesco_txn_id(String nesco_txn_id) {
-        this.nesco_txn_id = nesco_txn_id;
+    public void setDisco_txn_id(String disco_txn_id) {
+        this.disco_txn_id = disco_txn_id;
     }
 
     public Double getTotal_billAmount() {

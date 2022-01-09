@@ -11,37 +11,23 @@ import java.util.Date;
 @Entity
 @Table(name="tbl_billinfo")
 public class BillInfoEntity {
-
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.AUTO)
 	  private long id;
-	 
 	  private String account_No;
-		  
 	  private String name;
-		  
 	  private String address;
-		  
 	  private String metter_No;
-	  
 	  @Column(name = "bill_No",unique=true) 	  
 	  private String billNo;
-	  
 	  private String consumer_No;
-	  
 	  private Double bill_Amount;
-	  
 	  private Double total_BillAmount;
-	  
 	  private Double vat_Amount;
-	  
 	  private Double LPC_Amount;
-	  
 	  private String payment_Status;
-	  
 	  @DateTimeFormat(pattern = "yyyy-MM-dd")
 	  private Date due_Date;
-	  
 	  @DateTimeFormat(pattern = "yyyy-MM-dd")
 	  private Date collection_Date;
 

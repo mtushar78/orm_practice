@@ -14,6 +14,7 @@ import orm_practice.practice.service.BillInfoService;
 import orm_practice.practice.service.StudentService;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -85,4 +86,10 @@ public class RestApiController {
         List<JpaProjection> list =  billInfoService.getDataWithProjection();
         return new ResponseEntity<List<JpaProjection>>(list, new HttpHeaders(), HttpStatus.OK);
     }
+    @GetMapping("/test")
+    public void getDate(){
+       Date date = null;
+       //return date.getDate();
+    }
+
 }
