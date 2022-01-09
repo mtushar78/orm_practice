@@ -85,7 +85,8 @@ https://solidsyntax.be/2013/10/17/fetching-collections-hibernate/
 Jpa projection is used for getting custom columns from a raw query (*native query*) in jpa and store them into objects.
 First we need to create an interface that has exact name and number of fields that are in the query. For example if the query is * select fname, lname, age, gender from person *
 then the corresponding interface's methids should be, getFname, getLname, getAge, getGender.
-	```
+	
+```
 	@Query(value = "select bi.bill_no,cast(bi.collection_date as date) collection_date,bi.bank_txn_id," +
             "bi.client_txn_id,bi.total_bill_amount Total_billAmount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
             "bi.rev_stamp_amount Rev_stampAmount ,bi.net_principal_Amount Net_principalAmount,bi.snd_id,sl.sndname,sl.display_order " +
@@ -97,9 +98,11 @@ then the corresponding interface's methids should be, getFname, getLname, getAge
             "bi.rev_stamp_amount,bi.net_principal_Amount,sl.display_order,sl.sndname " +
             "order by sl.display_order asc", nativeQuery = true)
          List<JpaProjection> billInfoWithProjection();
-	```
+```
+	
 This is the native query written into the `BillInfoRepo` repository. An interface `JpaProjection` is implemented.
-	```
+	
+```
 	public interface JpaProjection {
 		public String getBill_no();
 		public Date getCollection_date();
@@ -116,7 +119,7 @@ This is the native query written into the `BillInfoRepo` repository. An interfac
 		public Integer getDisplay_order();
 	}
 
-	```
+```
 
   DONE ! 
   Now let's see the output.
