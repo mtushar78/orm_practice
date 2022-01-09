@@ -83,7 +83,7 @@ https://solidsyntax.be/2013/10/17/fetching-collections-hibernate/
 
 # JPA Projection
 Jpa projection is used for getting custom columns from a raw query (*native query*) in jpa and store them into objects.
-First we need to create an interface that has exact name and number of fields that are in the query. For example if the query is * select fname, lname, age, gender from person *
+First we need to create an interface that has exact name and number of fields that are in the query. For example if the query is *select fname, lname, age, gender from person*
 then the corresponding interface's methids should be, getFname, getLname, getAge, getGender.
 	
 ```
