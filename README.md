@@ -80,3 +80,54 @@ https://solidsyntax.be/2013/10/17/fetching-collections-hibernate/
   I've made an api with the endpoint of `localhost:8082/api/getData` to see the result.
   
   ![orm getData](https://user-images.githubusercontent.com/30841228/148640067-0f012147-a9a2-4ade-9521-8089d11bf166.JPG)
+
+# JPA Projection
+Jpa projection is used for getting custom columns from a raw query (*native query*) in jpa and store them into objects.
+First we need to create an interface that has exact name and number of fields that are in the query. For example if the query is *select fname, lname, age, gender from person*
+then the corresponding interface's methids should be, getFname, getLname, getAge, getGender.
+	
+```
+	@Query(value = "select bi.bill_no,cast(bi.collection_date as date) collection_date,bi.bank_txn_id," +
+            "bi.client_txn_id,bi.total_bill_amount Total_billAmount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
+            "bi.rev_stamp_amount Rev_stampAmount ,bi.net_principal_Amount Net_principalAmount,bi.snd_id,sl.sndname,sl.display_order " +
+            "from tbl_billinfo bi " +
+            "join tbl_sndlist sl on sl.snd_id=bi.snd_id " +
+            "where payment_status='PAID' " +
+            "group by bi.snd_id, bi.bill_no,bi.collection_date, " +
+            "bi.bank_txn_id,bi.client_txn_id,bi.total_bill_amount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
+            "bi.rev_stamp_amount,bi.net_principal_Amount,sl.display_order,sl.sndname " +
+            "order by sl.display_order asc", nativeQuery = true)
+         List<JpaProjection> billInfoWithProjection();
+```
+	
+This is the native query written into the `BillInfoRepo` repository. An interface `JpaProjection` is implemented.
+	
+```
+	public interface JpaProjection {
+		public String getBill_no();
+		public Date getCollection_date();
+		public String getBank_txn_id();
+		public String getClient_txn_id();
+		public Double getTotal_billAmount();
+		public Double getPrincipal_Amount();
+		public Double getVat_amount();
+		public Double getLpc_amount();
+		public Double getRev_stampAmount();
+		public Double getNet_principalAmount();
+		public Integer getSnd_id();
+		public String getSndname();
+		public Integer getDisplay_order();
+	}
+
+```
+
+  DONE ! 
+  Now let's see the output.
+# Output
+	
+ Now I've created a seperate endpoint `http://localhost:8082/api/projection` just to get value from Jpa projection process. 
+	
+
+![projection](https://user-images.githubusercontent.com/30841228/148671959-09c31dd2-5948-4f56-92de-804cd3af5252.JPG)
+
+**Don't forget to give me a star!**
