@@ -19,7 +19,7 @@ public interface BillInfoRepo extends JpaRepository<BillInfoEntity, Long> {
 
 
     @Query(value = "select bi.bill_no,cast(bi.collection_date as date) collection_date,bi.bank_txn_id," +
-            "bi.nesco_txn_id,bi.total_bill_amount Total_billAmount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
+            "bi.client_txn_id,bi.total_bill_amount Total_billAmount,bi.principal_amount,bi.vat_amount,bi.lpc_amount, " +
             "bi.rev_stamp_amount Rev_stampAmount ,bi.net_principal_Amount Net_principalAmount,bi.snd_id,sl.sndname,sl.display_order " +
             "from tbl_billinfo bi " +
             "join tbl_sndlist sl on sl.snd_id=bi.snd_id " +
