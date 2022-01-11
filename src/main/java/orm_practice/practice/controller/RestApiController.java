@@ -86,10 +86,9 @@ public class RestApiController {
         List<JpaProjection> list =  billInfoService.getDataWithProjection();
         return new ResponseEntity<List<JpaProjection>>(list, new HttpHeaders(), HttpStatus.OK);
     }
-    @GetMapping("/test")
-    public void getDate(){
-       Date date = null;
-       //return date.getDate();
+    @GetMapping("/getDemo")
+    public DemoTest getDate(@RequestParam Long id){
+       return studentService.getADemoTest(id);
     }
 
 }

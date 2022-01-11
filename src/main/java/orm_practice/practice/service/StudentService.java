@@ -2,7 +2,9 @@ package orm_practice.practice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import orm_practice.practice.model.DemoTest;
 import orm_practice.practice.model.Student;
+import orm_practice.practice.repository.DemoRepository;
 import orm_practice.practice.repository.StudentRepository;
 
 import java.util.Optional;
@@ -11,6 +13,8 @@ import java.util.Optional;
 public class StudentService {
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    DemoRepository demoRepository;
 
     public Student createRecord(Student student){
         if(String.valueOf(student.getId()) ==null){
@@ -30,5 +34,11 @@ public class StudentService {
             }
             return student;
         }
+    }
+
+    public DemoTest getADemoTest(Long id){
+        Optional<DemoTest> x = demoRepository.findById(id);
+
+        return x.get();
     }
 }
