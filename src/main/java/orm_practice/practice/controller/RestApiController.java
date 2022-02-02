@@ -1,5 +1,7 @@
 package orm_practice.practice.controller;
 
+import com.google.gson.Gson;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -12,10 +14,11 @@ import orm_practice.practice.repository.JpaProjection;
 import orm_practice.practice.repository.StudentRepository;
 import orm_practice.practice.service.BillInfoService;
 import orm_practice.practice.service.StudentService;
-
+import org.json.JSONObject;
 import javax.validation.Valid;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -90,5 +93,40 @@ public class RestApiController {
     public DemoTest getDate(@RequestParam Long id){
        return studentService.getADemoTest(id);
     }
+    @GetMapping("/json")
+    public ResponseEntity<Object> jsonObject() {
+       String str = "{\n" +
+               "\"Age\": 21,\n" +
+               "\"DOB\": \"Mon, 20 Mar 2000 00:00:00 GMT\",\n" +
+               "\"FavoriteColors\": {\n" +
+               "\"FavoriteColorsItem\": [\n" +
+               "\"Red\"\n" +
+               "]\n" +
+               "},\n" +
+               "\"Home\": {\n" +
+               "\"City\": \"Pueblo\",\n" +
+               "\"State\": \"AK\",\n" +
+               "\"Street\": \"6977 First Street\",\n" +
+               "\"Zip\": \"63163\"\n" +
+               "},\n" +
+               "\"Name\": \"Newton,Dave R.\",\n" +
+               "\"Office\": {\n" +
+               "\"City\": \"Washington\",\n" +
+               "\"State\": \"MN\",\n" +
+               "\"Street\": \"9984 Second Blvd\",\n" +
+               "\"Zip\": \"42829\"\n" +
+               "},\n" +
+               "\"SSN\": \"384-10-6538\",\n" +
+               "\"Spouse\": null\n" +
+               "}";
+       try{
+           JSONObject jsonObject = new JSONObject(str);
+           Gson gson = new Gson();
+           Map map = gson.fromJson(str, Map.class);
 
+           return new ResponseEntity<Object>(map,new HttpHeaders(), HttpStatus.OK);
+       }catch (JSONException exception){
+           return new ResponseEntity<Object>(exception,new HttpHeaders(), HttpStatus.EXPECTATION_FAILED);
+       }
+    }
 }
